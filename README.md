@@ -1,5 +1,6 @@
 # Godot-4-FPS-Player
- A base FPS player for Godot 4.0
+ A base FPS player for Godot 4.0.
+ Make sure to set the max framerate of the project to 60, otherwise you will need to adjust the speed values.
  
 ## Inputs to map
 1. movement_forward
