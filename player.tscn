@@ -1,8 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bedc24uv76lk3"]
+[gd_scene load_steps=5 format=3 uid="uid://bedc24uv76lk3"]
 
 [ext_resource type="Script" path="res://Assets/Scenes/player.gd" id="1_fslyg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v1qeq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hes7g"]
+size = Vector3(1, 1.73178, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ub4ux"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_fslyg")
@@ -10,5 +16,30 @@ script = ExtResource("1_fslyg")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_v1qeq")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="Interact" type="Area3D" parent="." groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.830863)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interact"]
+shape = SubResource("BoxShape3D_hes7g")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+near = 0.001
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraPivot/Camera3D"]
+visible = false
+light_color = Color(1, 0.964706, 0.760784, 1)
+light_energy = 1.432
+shadow_enabled = true
+spot_angle = 40.5652
+
+[node name="HeadCollision" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HeadCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.725143, 0)
+shape = SubResource("BoxShape3D_ub4ux")
